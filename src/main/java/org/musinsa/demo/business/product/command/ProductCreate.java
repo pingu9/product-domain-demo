@@ -1,5 +1,7 @@
 package org.musinsa.demo.business.product.command;
 
-public record ProductCreate(String name, Integer price, Long categoryId, Long brandId) {
+import java.util.Set;
+
+public record ProductCreate(String name, Integer price, Set<Long> categoryIds, Set<Long> brandIds) {
 
 }

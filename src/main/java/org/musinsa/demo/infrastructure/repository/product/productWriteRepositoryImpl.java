@@ -19,14 +19,7 @@ public class productWriteRepositoryImpl implements ProductWriteRepository {
     private final ProductBrandJpaRepository productBrandJpaRepository;
 
     @Override
-    public void save(final ProductEntity productEntity, final BrandEntity brandEntity, final CategoryEntity categoryEntity) {
-        productJpaRepository.save(productEntity);
-        productCategoryJpaRepository.save(ProductCategoryEntity.of(productEntity, categoryEntity));
-        productBrandJpaRepository.save(ProductBrandEntity.of(productEntity, brandEntity));
-    }
-
-    @Override
-    public void update(final ProductEntity productEntity, final Collection<BrandEntity> brandEntities, final Collection<CategoryEntity> categoryEntities) {
+    public void save(final ProductEntity productEntity, final Collection<BrandEntity> brandEntities, final Collection<CategoryEntity> categoryEntities) {
         productJpaRepository.save(productEntity);
         productCategoryJpaRepository.saveAll(ProductCategoryEntity.of(productEntity, categoryEntities));
         productBrandJpaRepository.saveAll(ProductBrandEntity.of(productEntity, brandEntities));

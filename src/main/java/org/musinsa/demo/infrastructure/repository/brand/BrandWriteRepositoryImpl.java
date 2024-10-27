@@ -16,11 +16,6 @@ public class BrandWriteRepositoryImpl implements BrandWriteRepository {
     }
 
     @Override
-    public void update(final BrandEntity brandEntity) {
-        brandJpaRepository.save(brandEntity);
-    }
-
-    @Override
     public void delete(final Long id) {
         brandJpaRepository.deleteById(id);
     }

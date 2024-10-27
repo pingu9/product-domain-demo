@@ -8,7 +8,6 @@ import java.util.Collection;
 
 public interface ProductWriteRepository {
 
-    void save(ProductEntity productEntity, BrandEntity brandEntity, CategoryEntity categoryEntity);
-    void update(ProductEntity productEntity, Collection<BrandEntity> brandEntities, Collection<CategoryEntity> categoryEntities);
+    void save(ProductEntity productEntity, Collection<BrandEntity> brandEntities, Collection<CategoryEntity> categoryEntities);
     void delete(Long id);
 }

@@ -2,6 +2,7 @@ package org.musinsa.demo.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.musinsa.demo.business.domain.Category;
 
 @Entity
 @Getter
@@ -17,4 +18,11 @@ public class CategoryEntity {
     private Long id;
 
     private String name;
+
+    public static CategoryEntity fromDomain(final Category category) {
+        return CategoryEntity.builder()
+                .id(category.getId())
+                .name(category.getName())
+                .build();
+    }
 }
