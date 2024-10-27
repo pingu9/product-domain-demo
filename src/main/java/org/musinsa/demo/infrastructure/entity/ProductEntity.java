@@ -2,8 +2,8 @@ package org.musinsa.demo.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.musinsa.demo.business.product.ProductCreate;
-import org.musinsa.demo.business.product.ProductUpdate;
+import org.musinsa.demo.business.product.command.ProductCreate;
+import org.musinsa.demo.business.product.command.ProductUpdate;
 
 @Entity
 @Getter

@@ -1,4 +1,4 @@
-package org.musinsa.demo.business.product;
+package org.musinsa.demo.business.product.command;
 
 import java.util.Collection;
 
