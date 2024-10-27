@@ -1,7 +1,7 @@
 insert into brand(id, name) values (1, 'A');
 insert into brand(id, name) values (2, 'B');
 insert into brand(id, name) values (3, 'C');
-insert into brand(id, name) values (4. 'D');
+insert into brand(id, name) values (4, 'D');
 insert into brand(id, name) values (5, 'E');
 insert into brand(id, name) values (6, 'F');
 insert into brand(id, name) values (7, 'G');

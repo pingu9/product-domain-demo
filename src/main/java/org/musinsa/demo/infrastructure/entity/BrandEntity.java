@@ -10,7 +10,7 @@ import org.musinsa.demo.business.brand.command.BrandUpdate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(access = AccessLevel.PRIVATE)
-@Table(name = "category")
+@Table(name = "brand")
 public class BrandEntity {
 
     @Id
