@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(access = AccessLevel.PRIVATE)
-@Table(name = "product_category")
-public class ProductCategoryEntity {
+@Table(name = "product_brand")
+public class ProductBrandEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,23 +23,22 @@ public class ProductCategoryEntity {
     private ProductEntity product;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    private CategoryEntity category;
+    @JoinColumn(name = "brand_id")
+    private BrandEntity brand;
 
-    public static ProductCategoryEntity of(final ProductEntity productEntity, final CategoryEntity categoryEntity) {
-        return ProductCategoryEntity.builder()
+    public static ProductBrandEntity of(final ProductEntity productEntity, final BrandEntity brandEntity) {
+        return ProductBrandEntity.builder()
                 .product(productEntity)
-                .category(categoryEntity)
+                .brand(brandEntity)
                 .build();
     }
 
-    public static Collection<ProductCategoryEntity> of(final ProductEntity productEntity, final Collection<CategoryEntity> categoryEntities) {
-        return categoryEntities.stream()
-                .map(categoryEntity -> ProductCategoryEntity.builder()
+    public static Collection<ProductBrandEntity> of(final ProductEntity productEntity, final Collection<BrandEntity> brandEntities) {
+        return brandEntities.stream()
+                .map(brandEntity -> ProductBrandEntity.builder()
                         .product(productEntity)
-                        .category(categoryEntity)
+                        .brand(brandEntity)
                         .build())
                 .collect(Collectors.toList());
     }
-
 }

@@ -2,6 +2,8 @@ package org.musinsa.demo.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.musinsa.demo.business.product.ProductCreate;
+import org.musinsa.demo.business.product.ProductUpdate;
 
 @Entity
 @Getter
@@ -16,4 +18,18 @@ public class ProductEntity {
     private Long id;
 
     private String name;
+
+    public static ProductEntity from(final ProductCreate productCreate) {
+        return ProductEntity.builder()
+                .name(productCreate.name())
+                .build();
+    }
+
+    public static ProductEntity from(final ProductUpdate productUpdate) {
+        return ProductEntity.builder()
+                .id(productUpdate.id())
+                .name(productUpdate.name())
+                .build();
+    }
+
 }
