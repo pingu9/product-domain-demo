@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(access = AccessLevel.PRIVATE)
+@EqualsAndHashCode(of = "id")
 @Table(name = "product_brand")
 public class ProductBrandEntity {
 

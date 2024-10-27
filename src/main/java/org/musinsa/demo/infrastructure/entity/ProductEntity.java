@@ -2,14 +2,17 @@ package org.musinsa.demo.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.musinsa.demo.business.product.command.ProductCreate;
-import org.musinsa.demo.business.product.command.ProductUpdate;
+import org.musinsa.demo.business.domain.Product;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(access = AccessLevel.PRIVATE)
+@EqualsAndHashCode(of = "id")
 @Table(name = "product")
 public class ProductEntity {
 
@@ -21,19 +24,29 @@ public class ProductEntity {
 
     private Integer price;
 
-    public static ProductEntity from(final ProductCreate productCreate) {
+    @OneToMany(mappedBy = "product")
+    private Set<ProductCategoryEntity> productCategories;
+
+    @OneToMany(mappedBy = "brand")
+    private Set<ProductBrandEntity> productBrands;
+
+    public static ProductEntity fromDomain(final Product product) {
         return ProductEntity.builder()
-                .name(productCreate.name())
-                .price(productCreate.price())
+                .id(product.getId())
+                .name(product.getName())
+                .price(product.getPrice())
                 .build();
     }
 
-    public static ProductEntity from(final ProductUpdate productUpdate) {
-        return ProductEntity.builder()
-                .id(productUpdate.id())
-                .price(productUpdate.price())
-                .name(productUpdate.name())
-                .build();
+    public Set<CategoryEntity> getCategoryEntities() {
+        return productCategories.stream()
+                .map(ProductCategoryEntity::getCategory)
+                .collect(Collectors.toSet());
     }
 
+    public Set<BrandEntity> getBrandEntities() {
+        return productBrands.stream()
+                .map(ProductBrandEntity::getBrand)
+                .collect(Collectors.toSet());
+    }
 }

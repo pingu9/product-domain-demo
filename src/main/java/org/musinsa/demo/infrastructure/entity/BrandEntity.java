@@ -2,14 +2,14 @@ package org.musinsa.demo.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.musinsa.demo.business.brand.command.BrandCreate;
-import org.musinsa.demo.business.brand.command.BrandUpdate;
+import org.musinsa.demo.business.domain.Brand;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(access = AccessLevel.PRIVATE)
+@EqualsAndHashCode(of = "id")
 @Table(name = "brand")
 public class BrandEntity {
 
@@ -19,16 +19,10 @@ public class BrandEntity {
 
     private String name;
 
-    public static BrandEntity from(final BrandCreate brandCreate) {
+    public static BrandEntity fromDomain(final Brand brand) {
         return BrandEntity.builder()
-                .name(brandCreate.name())
-                .build();
-    }
-
-    public static BrandEntity from(final BrandUpdate brandUpdate) {
-        return BrandEntity.builder()
-                .id(brandUpdate.id())
-                .name(brandUpdate.name())
+                .id(brand.getId())
+                .name(brand.getName())
                 .build();
     }
 
