@@ -19,15 +19,19 @@ public class ProductEntity {
 
     private String name;
 
+    private Integer price;
+
     public static ProductEntity from(final ProductCreate productCreate) {
         return ProductEntity.builder()
                 .name(productCreate.name())
+                .price(productCreate.price())
                 .build();
     }
 
     public static ProductEntity from(final ProductUpdate productUpdate) {
         return ProductEntity.builder()
                 .id(productUpdate.id())
+                .price(productUpdate.price())
                 .name(productUpdate.name())
                 .build();
     }
