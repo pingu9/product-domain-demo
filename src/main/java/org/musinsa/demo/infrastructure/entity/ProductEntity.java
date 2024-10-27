@@ -28,7 +28,7 @@ public class ProductEntity {
     @OneToMany(mappedBy = "product")
     private Set<ProductCategoryEntity> productCategories;
 
-    @OneToMany(mappedBy = "brand")
+    @OneToMany(mappedBy = "product")
     private Set<ProductBrandEntity> productBrands;
 
     public static ProductEntity fromDomain(final Product product) {
