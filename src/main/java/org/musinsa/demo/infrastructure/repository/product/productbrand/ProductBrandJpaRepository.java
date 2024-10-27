@@ -1,4 +1,4 @@
-package org.musinsa.demo.infrastructure.repository.productbrand;
+package org.musinsa.demo.infrastructure.repository.product.productbrand;
 
 import org.musinsa.demo.infrastructure.entity.ProductBrandEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

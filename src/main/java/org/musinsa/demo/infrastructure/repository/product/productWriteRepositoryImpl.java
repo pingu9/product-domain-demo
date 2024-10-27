@@ -2,8 +2,8 @@ package org.musinsa.demo.infrastructure.repository.product;
 
 import lombok.RequiredArgsConstructor;
 import org.musinsa.demo.infrastructure.entity.*;
-import org.musinsa.demo.infrastructure.repository.productbrand.ProductBrandJpaRepository;
-import org.musinsa.demo.infrastructure.repository.productcategory.ProductCategoryJpaRepository;
+import org.musinsa.demo.infrastructure.repository.product.productbrand.ProductBrandJpaRepository;
+import org.musinsa.demo.infrastructure.repository.product.productcategory.ProductCategoryJpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package org.musinsa.demo.infrastructure.repository.productcategory;
+package org.musinsa.demo.infrastructure.repository.product.productcategory;
 
 import org.musinsa.demo.infrastructure.entity.ProductCategoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
