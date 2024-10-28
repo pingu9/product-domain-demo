@@ -16,10 +16,13 @@ public class BrandWriteService {
 
     private final BrandWriteRepository brandWriteRepository;
 
+    private final BrandWriteValidator brandWriteValidator;
+
     @Transactional
     public void create(final BrandCreateCommand brandCreateCommand) {
 
         final var brandEntity = BrandEntity.fromCommand(brandCreateCommand);
+        brandWriteValidator.validateInsert(brandEntity);
         brandWriteRepository.save(brandEntity);
     }
 

@@ -17,6 +17,10 @@ public class ProductWriteValidator {
 
     public void validateInsert(final ProductEntity productEntity, final Set<BrandEntity> brandEntities, final Set<CategoryEntity> categoryEntities) {
 
+        if (productReadRepository.existsByName(productEntity.getName())) {
+            throw new IllegalArgumentException("Product name already exists");
+        }
+
         if (brandEntities.isEmpty()) {
             throw new IllegalArgumentException("Brand not found");
         }

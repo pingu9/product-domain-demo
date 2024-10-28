@@ -11,4 +11,6 @@ public interface BrandReadRepository {
 
     Set<Brand> findAllByIds(Set<Long> ids);
 
+    boolean existsByName(String name);
+
 }

@@ -27,4 +27,9 @@ public class ProductReadRepositoryImpl implements ProductReadRepository {
                 .collect(Collectors.toSet());
     }
 
+    @Override
+    public boolean existsByName(final String name) {
+        return productJpaRepository.existsByName(name);
+    }
+
 }

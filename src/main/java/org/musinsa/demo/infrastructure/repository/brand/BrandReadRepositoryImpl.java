@@ -27,4 +27,10 @@ public class BrandReadRepositoryImpl implements BrandReadRepository {
                 .map(Brand::fromEntity)
                 .collect(Collectors.toSet());
     }
+
+    @Override
+    public boolean existsByName(final String name) {
+        return brandJpaRepository.existsByName(name);
+    }
+
 }
