@@ -28,8 +28,9 @@ public class ProductReadRepositoryImpl implements ProductReadRepository {
     }
 
     @Override
-    public boolean existsByName(final String name) {
-        return productJpaRepository.existsByName(name);
+    public Optional<Product> findByName(final String name) {
+        return productJpaRepository.findByName(name)
+                .map(Product::fromEntity);
     }
 
 }

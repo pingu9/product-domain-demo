@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.musinsa.demo.business.product.Product;
 import org.musinsa.demo.business.product.command.ProductCreateCommand;
+import org.musinsa.demo.business.product.command.ProductUpdateCommand;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -46,6 +48,14 @@ public class ProductEntity {
                 .build();
     }
 
+    public static ProductEntity fromCommand(final ProductUpdateCommand productUpdateCommand) {
+        return ProductEntity.builder()
+                .id(productUpdateCommand.id())
+                .name(productUpdateCommand.name())
+                .price(productUpdateCommand.price())
+                .build();
+    }
+
     public Set<CategoryEntity> getCategoryEntities() {
         return productCategories.stream()
                 .map(ProductCategoryEntity::getCategory)
@@ -57,4 +67,11 @@ public class ProductEntity {
                 .map(ProductBrandEntity::getBrand)
                 .collect(Collectors.toSet());
     }
+
+    public void setRelations(final List<ProductCategoryEntity> productCategories,
+                             final List<ProductBrandEntity> productBrands) {
+        this.productCategories = Set.copyOf(productCategories);
+        this.productBrands = Set.copyOf(productBrands);
+    }
+
 }

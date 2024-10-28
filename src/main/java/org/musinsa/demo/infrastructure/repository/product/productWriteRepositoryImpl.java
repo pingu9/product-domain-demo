@@ -1,6 +1,7 @@
 package org.musinsa.demo.infrastructure.repository.product;
 
 import lombok.RequiredArgsConstructor;
+import org.musinsa.demo.business.product.Product;
 import org.musinsa.demo.infrastructure.entity.*;
 import org.musinsa.demo.infrastructure.repository.product.productbrand.ProductBrandJpaRepository;
 import org.musinsa.demo.infrastructure.repository.product.productcategory.ProductCategoryJpaRepository;
@@ -19,10 +20,14 @@ public class productWriteRepositoryImpl implements ProductWriteRepository {
     private final ProductBrandJpaRepository productBrandJpaRepository;
 
     @Override
-    public void save(final ProductEntity productEntity, final Collection<BrandEntity> brandEntities, final Collection<CategoryEntity> categoryEntities) {
-        productJpaRepository.save(productEntity);
-        productCategoryJpaRepository.saveAll(ProductCategoryEntity.of(productEntity, categoryEntities));
-        productBrandJpaRepository.saveAll(ProductBrandEntity.of(productEntity, brandEntities));
+    public Product save(final ProductEntity productEntity, final Collection<BrandEntity> brandEntities, final Collection<CategoryEntity> categoryEntities) {
+        final var created = productJpaRepository.save(productEntity);
+        final var productCategoryEntities = productCategoryJpaRepository.saveAll(ProductCategoryEntity.of(productEntity, categoryEntities));
+        final var productBrandEntities = productBrandJpaRepository.saveAll(ProductBrandEntity.of(productEntity, brandEntities));
+
+        created.setRelations(productCategoryEntities, productBrandEntities);
+
+        return Product.fromEntity(created);
     }
 
     @Override

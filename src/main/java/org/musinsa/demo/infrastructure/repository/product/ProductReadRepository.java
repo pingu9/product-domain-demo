@@ -11,6 +11,6 @@ public interface ProductReadRepository {
 
     Set<Product> findAll();
 
-    boolean existsByName(String name);
+    Optional<Product> findByName(String name);
 
 }
