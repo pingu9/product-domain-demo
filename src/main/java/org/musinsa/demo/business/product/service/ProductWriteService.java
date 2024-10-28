@@ -3,8 +3,8 @@ package org.musinsa.demo.business.product.service;
 import lombok.RequiredArgsConstructor;
 import org.musinsa.demo.business.brand.service.BrandReadService;
 import org.musinsa.demo.business.category.service.CategoryReadService;
-import org.musinsa.demo.business.product.command.ProductCreate;
-import org.musinsa.demo.business.product.command.ProductUpdate;
+import org.musinsa.demo.business.product.command.ProductCreateCommand;
+import org.musinsa.demo.business.product.command.ProductUpdateCommand;
 import org.musinsa.demo.infrastructure.entity.BrandEntity;
 import org.musinsa.demo.infrastructure.entity.CategoryEntity;
 import org.musinsa.demo.infrastructure.entity.ProductEntity;
@@ -29,22 +29,22 @@ public class ProductWriteService {
     private final ProductWriteValidator productWriteValidator;
 
     @Transactional
-    public void insert(final ProductCreate productCreate) {
+    public void insert(final ProductCreateCommand productCreateCommand) {
 
-        final var productEntity = ProductEntity.fromCommand(productCreate);
-        final var brandEntities = brandReadService.findAllByIds(productCreate.brandIds()).stream().map(BrandEntity::fromDomain).collect(Collectors.toSet());
-        final var categoryEntities = categoryReadService.findAllByIds(productCreate.categoryIds()).stream().map(CategoryEntity::fromDomain).collect(Collectors.toSet());
+        final var productEntity = ProductEntity.fromCommand(productCreateCommand);
+        final var brandEntities = brandReadService.findAllByIds(productCreateCommand.brandIds()).stream().map(BrandEntity::fromDomain).collect(Collectors.toSet());
+        final var categoryEntities = categoryReadService.findAllByIds(productCreateCommand.categoryIds()).stream().map(CategoryEntity::fromDomain).collect(Collectors.toSet());
 
         productWriteValidator.validateInsert(productEntity, brandEntities, categoryEntities);
         productWriteRepository.save(productEntity, brandEntities, categoryEntities);
     }
 
     @Transactional
-    public void update(final ProductUpdate productUpdate) {
+    public void update(final ProductUpdateCommand productUpdateCommand) {
 
-        final var productEntity = ProductEntity.fromDomain(productReadService.findById(productUpdate.id()));
-        final var brandEntities = brandReadService.findAllByIds(productUpdate.brandIds()).stream().map(BrandEntity::fromDomain).collect(Collectors.toSet());
-        final var categoryEntities = categoryReadService.findAllByIds(productUpdate.categoryIds()).stream().map(CategoryEntity::fromDomain).collect(Collectors.toSet());
+        final var productEntity = ProductEntity.fromDomain(productReadService.findById(productUpdateCommand.id()));
+        final var brandEntities = brandReadService.findAllByIds(productUpdateCommand.brandIds()).stream().map(BrandEntity::fromDomain).collect(Collectors.toSet());
+        final var categoryEntities = categoryReadService.findAllByIds(productUpdateCommand.categoryIds()).stream().map(CategoryEntity::fromDomain).collect(Collectors.toSet());
 
         productWriteValidator.validateUpdate(productEntity, brandEntities, categoryEntities);
         productWriteRepository.save(productEntity, brandEntities, categoryEntities);
