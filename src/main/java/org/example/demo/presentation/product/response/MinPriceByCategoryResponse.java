@@ -38,7 +38,7 @@ public class MinPriceByCategoryResponse {
                 .map(categoryMinOrMaxPrice -> CategoryInnerResponse.builder()
                         .categoryId(categoryMinOrMaxPrice.getCategoryId())
                         .categoryName(categoryMinOrMaxPrice.getCategoryName())
-                        .brandName(String.join(", ", categoryMinOrMaxPrice.getBrandNames()))
+                        .brandName(categoryMinOrMaxPrice.getBrandNames().stream().max(Comparator.naturalOrder()).orElse(null))
                         .price(categoryMinOrMaxPrice.getPrice())
                         .build())
                 .sorted(Comparator.comparing(CategoryInnerResponse::getCategoryId))
