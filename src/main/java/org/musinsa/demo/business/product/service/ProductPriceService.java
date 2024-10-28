@@ -22,12 +22,11 @@ public class ProductPriceService {
 
     @Transactional(readOnly = true)
     public List<CategoryMinOrMaxPrice> findMinPriceByCategories() {
-        return findFirstProductGroupedByCategoriesWithComparator(getMinPriceComparator());
+        return findFirstProductGroupedByCategories(getMinPriceComparator());
     }
 
     @Transactional(readOnly = true)
-    public List<CategoryMinOrMaxPrice> findFirstProductGroupedByCategoriesWithComparator(final Comparator<Product> comparator) {
-
+    public List<CategoryMinOrMaxPrice> findFirstProductGroupedByCategories(final Comparator<Product> comparator) {
         final var allProducts = productReadService.findAll();
         final var allCategories = allProducts.stream()
                 .map(Product::getCategories)
@@ -64,7 +63,7 @@ public class ProductPriceService {
     @Transactional(readOnly = true)
     public CategoryMinOrMaxPrice findMinPriceByCategoryName(String categoryName) {
 
-        return findFirstProductGroupedByCategoriesWithComparator(getMinPriceComparator()).stream()
+        return findFirstProductGroupedByCategories(getMinPriceComparator()).stream()
                 .filter(categoryMinOrMaxPrice -> categoryMinOrMaxPrice.getCategoryName().equals(categoryName))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Category not found"));
@@ -73,7 +72,7 @@ public class ProductPriceService {
     @Transactional(readOnly = true)
     public CategoryMinOrMaxPrice findMaxPriceByCategoryName(String categoryName) {
 
-        return findFirstProductGroupedByCategoriesWithComparator(getMaxPriceComparator()).stream()
+        return findFirstProductGroupedByCategories(getMaxPriceComparator()).stream()
                 .filter(categoryMinOrMaxPrice -> categoryMinOrMaxPrice.getCategoryName().equals(categoryName))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Category not found"));
@@ -99,7 +98,7 @@ public class ProductPriceService {
                             .filter(product -> product.getBrands().contains(brand))
                             .toList();
 
-                    final var productHasMinPriceForEachCategory = allCategories.stream()
+                    final var representedMinPriceProductsFromEachCategory = allCategories.stream()
                             .map(category -> {
                                 final var productsOfBrandAndCategory = productsOfBrand.stream()
                                         .filter(product -> product.getCategories().contains(category))
@@ -112,12 +111,12 @@ public class ProductPriceService {
                             })
                             .toList();
 
-                    final var minPrice = productHasMinPriceForEachCategory.stream()
+                    final var minPrice = representedMinPriceProductsFromEachCategory.stream()
                             .map(RepresentProductForCategoryDto::getPrice)
                             .reduce(Integer::sum)
                             .orElseThrow(() -> new IllegalArgumentException("Product not found"));
 
-                    return BrandMinPrice.of(brand.getName(), productHasMinPriceForEachCategory, minPrice);
+                    return BrandMinPrice.of(brand.getName(), representedMinPriceProductsFromEachCategory, minPrice);
                 })
                 .toList();
 
