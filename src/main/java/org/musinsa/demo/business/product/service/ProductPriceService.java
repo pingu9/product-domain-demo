@@ -128,7 +128,7 @@ public class ProductPriceService {
 
         return minPriceForEachBrands.stream()
                 .filter(brandMinPrice -> brandMinPrice.getPrice().equals(minPrice))
-                .min(Comparator.comparing(BrandMinPrice::getBrandName)) // 현재는 동률인 경우 브랜드 이름이 사전순으로 가장 빠른 브랜드를 반환
+                .max(Comparator.comparing(BrandMinPrice::getBrandName)) // 현재는 동률인 경우 브랜드 이름이 사전 역순으로 브랜드를 반환
                 .orElseThrow(() -> new IllegalArgumentException("Brand not found"));
     }
 }
