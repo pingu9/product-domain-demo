@@ -1,4 +1,4 @@
-package org.musinsa.demo.business.domain;
+package org.musinsa.demo.business.category;
 
 import lombok.AccessLevel;
 import lombok.Builder;

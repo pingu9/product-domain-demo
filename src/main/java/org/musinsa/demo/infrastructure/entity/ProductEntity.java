@@ -2,8 +2,8 @@ package org.musinsa.demo.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.musinsa.demo.business.domain.Product;
-import org.musinsa.demo.business.product.command.ProductCreate;
+import org.musinsa.demo.business.product.Product;
+import org.musinsa.demo.business.product.command.ProductCreateCommand;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -39,10 +39,10 @@ public class ProductEntity {
                 .build();
     }
 
-    public static ProductEntity fromCommand(final ProductCreate productCreate) {
+    public static ProductEntity fromCommand(final ProductCreateCommand productCreateCommand) {
         return ProductEntity.builder()
-                .name(productCreate.name())
-                .price(productCreate.price())
+                .name(productCreateCommand.name())
+                .price(productCreateCommand.price())
                 .build();
     }
 

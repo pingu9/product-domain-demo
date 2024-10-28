@@ -2,8 +2,8 @@ package org.musinsa.demo.presentation.brand;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.musinsa.demo.business.brand.command.BrandCreate;
-import org.musinsa.demo.business.brand.command.BrandUpdate;
+import org.musinsa.demo.business.brand.command.BrandCreateCommand;
+import org.musinsa.demo.business.brand.command.BrandUpdateCommand;
 import org.musinsa.demo.business.brand.service.BrandWriteService;
 import org.musinsa.demo.presentation.brand.request.BrandCreateRequest;
 import org.musinsa.demo.presentation.brand.request.BrandUpdateRequest;
@@ -21,13 +21,13 @@ public class BrandController {
 
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody @Valid BrandCreateRequest request) {
-        brandWriteService.create(new BrandCreate(request.getName()));
+        brandWriteService.create(new BrandCreateCommand(request.getName()));
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
     public ResponseEntity<Void> update(@RequestBody @Valid BrandUpdateRequest request) {
-        brandWriteService.update(new BrandUpdate(request.getId(), request.getName()));
+        brandWriteService.update(new BrandUpdateCommand(request.getId(), request.getName()));
         return ResponseEntity.ok().build();
     }
 

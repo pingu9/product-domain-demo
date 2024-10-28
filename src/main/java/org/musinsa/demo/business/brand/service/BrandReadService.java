@@ -1,7 +1,7 @@
 package org.musinsa.demo.business.brand.service;
 
 import lombok.RequiredArgsConstructor;
-import org.musinsa.demo.business.domain.Brand;
+import org.musinsa.demo.business.brand.Brand;
 import org.musinsa.demo.infrastructure.repository.brand.BrandReadRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +20,4 @@ public class BrandReadService {
     public Set<Brand> findAllByIds(final Set<Long> ids) {
         return brandReadRepository.findAllByIds(ids);
     }
-
 }

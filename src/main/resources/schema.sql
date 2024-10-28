@@ -23,6 +23,9 @@ create table product (
 create index product_name_index
     on product (name);
 
+create index product_price_index
+    on product (price);
+
 create table product_brand (
     id         bigint auto_increment primary key not null ,
     product_id bigint not null,

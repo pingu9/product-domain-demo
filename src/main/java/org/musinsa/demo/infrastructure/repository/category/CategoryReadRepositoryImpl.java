@@ -1,7 +1,7 @@
 package org.musinsa.demo.infrastructure.repository.category;
 
 import lombok.RequiredArgsConstructor;
-import org.musinsa.demo.business.domain.Category;
+import org.musinsa.demo.business.category.Category;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

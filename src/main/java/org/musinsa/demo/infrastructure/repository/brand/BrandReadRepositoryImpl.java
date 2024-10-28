@@ -1,7 +1,7 @@
 package org.musinsa.demo.infrastructure.repository.brand;
 
 import lombok.RequiredArgsConstructor;
-import org.musinsa.demo.business.domain.Brand;
+import org.musinsa.demo.business.brand.Brand;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -27,5 +27,4 @@ public class BrandReadRepositoryImpl implements BrandReadRepository {
                 .map(Brand::fromEntity)
                 .collect(Collectors.toSet());
     }
-
 }

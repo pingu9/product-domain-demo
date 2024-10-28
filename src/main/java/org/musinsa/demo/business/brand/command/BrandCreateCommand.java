@@ -1,5 +1,5 @@
 package org.musinsa.demo.business.brand.command;
 
-public record BrandUpdate(Long id, String name) {
+public record BrandCreateCommand(String name) {
 
 }

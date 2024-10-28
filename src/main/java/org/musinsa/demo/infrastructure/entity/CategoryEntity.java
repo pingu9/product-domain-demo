@@ -2,7 +2,7 @@ package org.musinsa.demo.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.musinsa.demo.business.domain.Category;
+import org.musinsa.demo.business.category.Category;
 
 @Entity
 @Getter

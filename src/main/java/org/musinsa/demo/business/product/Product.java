@@ -1,9 +1,11 @@
-package org.musinsa.demo.business.domain;
+package org.musinsa.demo.business.product;
 
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import org.musinsa.demo.business.brand.Brand;
+import org.musinsa.demo.business.category.Category;
 import org.musinsa.demo.infrastructure.entity.ProductEntity;
 
 import java.util.Set;

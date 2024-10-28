@@ -2,8 +2,8 @@ package org.musinsa.demo.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.musinsa.demo.business.brand.command.BrandCreate;
-import org.musinsa.demo.business.domain.Brand;
+import org.musinsa.demo.business.brand.command.BrandCreateCommand;
+import org.musinsa.demo.business.brand.Brand;
 
 @Entity
 @Getter
@@ -27,9 +27,9 @@ public class BrandEntity {
                 .build();
     }
 
-    public static BrandEntity fromCommand(final BrandCreate brandCreate) {
+    public static BrandEntity fromCommand(final BrandCreateCommand brandCreateCommand) {
         return BrandEntity.builder()
-                .name(brandCreate.name())
+                .name(brandCreateCommand.name())
                 .build();
     }
 

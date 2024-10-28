@@ -1,6 +1,6 @@
 package org.musinsa.demo.infrastructure.repository.brand;
 
-import org.musinsa.demo.business.domain.Brand;
+import org.musinsa.demo.business.brand.Brand;
 
 import java.util.Optional;
 import java.util.Set;

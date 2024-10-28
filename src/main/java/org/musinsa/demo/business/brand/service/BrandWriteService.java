@@ -1,8 +1,8 @@
 package org.musinsa.demo.business.brand.service;
 
 import lombok.RequiredArgsConstructor;
-import org.musinsa.demo.business.brand.command.BrandCreate;
-import org.musinsa.demo.business.brand.command.BrandUpdate;
+import org.musinsa.demo.business.brand.command.BrandCreateCommand;
+import org.musinsa.demo.business.brand.command.BrandUpdateCommand;
 import org.musinsa.demo.infrastructure.entity.BrandEntity;
 import org.musinsa.demo.infrastructure.repository.brand.BrandWriteRepository;
 import org.springframework.stereotype.Service;
@@ -17,16 +17,16 @@ public class BrandWriteService {
     private final BrandWriteRepository brandWriteRepository;
 
     @Transactional
-    public void create(final BrandCreate brandCreate) {
+    public void create(final BrandCreateCommand brandCreateCommand) {
 
-        final var brandEntity = BrandEntity.fromCommand(brandCreate);
+        final var brandEntity = BrandEntity.fromCommand(brandCreateCommand);
         brandWriteRepository.save(brandEntity);
     }
 
     @Transactional
-    public void update(final BrandUpdate brandUpdate) {
+    public void update(final BrandUpdateCommand brandUpdateCommand) {
 
-        final var brandEntity = BrandEntity.fromDomain(brandReadService.findById(brandUpdate.id()));
+        final var brandEntity = BrandEntity.fromDomain(brandReadService.findById(brandUpdateCommand.id()));
         brandWriteRepository.save(brandEntity);
     }
 

@@ -1,7 +1,7 @@
 package org.musinsa.demo.business.category.service;
 
 import lombok.RequiredArgsConstructor;
-import org.musinsa.demo.business.domain.Category;
+import org.musinsa.demo.business.category.Category;
 import org.musinsa.demo.infrastructure.repository.category.CategoryReadRepository;
 import org.springframework.stereotype.Service;
 
