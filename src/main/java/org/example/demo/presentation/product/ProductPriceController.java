@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/products/price")
+@RequestMapping("/products/price")
 @RequiredArgsConstructor
 @Validated
 public class ProductPriceController {
@@ -32,7 +32,7 @@ public class ProductPriceController {
         return ResponseEntity.ok(MinPriceCombinationByBrandResponse.from(productPriceService.findMinPriceBrandWhenBuyingAllCategories()));
     }
 
-    @GetMapping("/min-max-price-by-each-by-category/{categoryName}")
+    @GetMapping("/min-max-price-by-category-name/{categoryName}")
     public ResponseEntity<MinMaxPriceForEachCategoryResponse> getMinMaxPriceByEachCategory(@PathVariable String categoryName) {
 
         return ResponseEntity.ok(MinMaxPriceForEachCategoryResponse.from(

@@ -31,6 +31,9 @@ public class MinPriceCombinationByBrandResponse {
                 .contents(InnerResponse.builder()
                         .brandName(minPriceBrandWhenBuyingAllCategories.getBrandName())
                         .categories(categories)
+                        .totalPrice(categories.stream()
+                                .map(InnerCategoryResponse::getPrice)
+                                .reduce(0, Integer::sum))
                         .build())
                 .build();
     }
@@ -44,6 +47,9 @@ public class MinPriceCombinationByBrandResponse {
 
         @JsonProperty("카테고리")
         private List<InnerCategoryResponse> categories;
+
+        @JsonProperty("총액")
+        private Integer totalPrice;
     }
 
     @Getter
