@@ -1,6 +1,5 @@
 package org.musinsa.demo.presentation.product.response;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
@@ -58,7 +57,6 @@ public class MinPriceCombinationByBrandResponse {
         private String categoryName;
 
         @JsonProperty("가격")
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "#,###")
         private Integer price;
     }
 

@@ -1,6 +1,5 @@
 package org.musinsa.demo.presentation.product.response;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,7 +14,6 @@ public class MinPriceByCategoryResponse {
 
     private List<CategoryInnerResponse> contents;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "#,###")
     private Integer totalPrice;
 
     @Getter
@@ -27,7 +25,6 @@ public class MinPriceByCategoryResponse {
 
         private String brandName;
 
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "#,###")
         private Integer price;
     }
 
@@ -35,7 +32,7 @@ public class MinPriceByCategoryResponse {
         final var totalPrice = categoryMinOrMaxPrices.stream()
                 .map(CategoryMinOrMaxPrice::getPrice)
                 .reduce(Integer::sum)
-                .orElse(null);
+                .orElse(0);
 
         final var contents = categoryMinOrMaxPrices.stream()
                 .map(categoryMinOrMaxPrice -> {
