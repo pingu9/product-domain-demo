@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import org.example.demo.business.product.CategoryMinOrMaxPrice;
 
+import java.util.Comparator;
+
 @Getter
 @Builder(access = AccessLevel.PRIVATE)
 public class MinMaxPriceForEachCategoryResponse {
@@ -35,11 +37,11 @@ public class MinMaxPriceForEachCategoryResponse {
         return MinMaxPriceForEachCategoryResponse.builder()
                 .categoryName(categoryMinPrice.getCategoryName())
                 .minPriceInnerResponse(InnerResponse.builder()
-                        .brandName(String.join(", ", categoryMinPrice.getBrandNames()))
+                        .brandName(categoryMinPrice.getBrandNames().stream().max(Comparator.naturalOrder()).orElse(null))
                         .price(categoryMinPrice.getPrice())
                         .build())
                 .maxPriceInnerResponse(InnerResponse.builder()
-                        .brandName(String.join(", ", categoryMaxPrice.getBrandNames()))
+                        .brandName(categoryMaxPrice.getBrandNames().stream().max(Comparator.naturalOrder()).orElse(null))
                         .price(categoryMaxPrice.getPrice())
                         .build())
                 .build();
