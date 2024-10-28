@@ -24,7 +24,7 @@ class ProductWriteServiceTest {
     private ProductReadService productReadService;
 
     @Test
-    void insertTest() {
+    void 상품_생성_테스트() {
         // given
         final var productCreateCommand = new ProductCreateCommand("test", 1000, Set.of(1L), Set.of(1L));
 
@@ -41,7 +41,7 @@ class ProductWriteServiceTest {
     }
 
     @Test
-    void insertDuplicateNameValidateTest() {
+    void 상품_생성_시_중복_이름을_검사한다() {
         // given
         final var productCreateCommand1 = new ProductCreateCommand("test", 1000, Set.of(1L), Set.of(1L));
         final var productCreateCommand2 = new ProductCreateCommand("test", 1100, Set.of(2L), Set.of(2L));
@@ -54,7 +54,7 @@ class ProductWriteServiceTest {
     }
 
     @Test
-    void updateTest() {
+    void 상품_업데이트_테스트() {
         // given
         final var productCreateCommand = new ProductCreateCommand("test", 1000, Set.of(1L), Set.of(1L));
         final var createdId = productWriteService.insert(productCreateCommand).getId();
@@ -73,7 +73,7 @@ class ProductWriteServiceTest {
     }
 
     @Test
-    void updateDuplicatedNameValidateTest() {
+    void 상품_업데이트_시_중복_이름을_검사한다() {
         // given
         final var productCreateCommand1 = new ProductCreateCommand("test", 1000, Set.of(1L), Set.of(1L));
         final var productCreateCommand2 = new ProductCreateCommand("test2", 1100, Set.of(2L), Set.of(2L));
@@ -87,7 +87,7 @@ class ProductWriteServiceTest {
     }
 
     @Test
-    void deleteTest() {
+    void 상품_삭제_테스트() {
         // given
         final var productCreateCommand = new ProductCreateCommand("test", 1000, Set.of(1L), Set.of(1L));
         final var createdId = productWriteService.insert(productCreateCommand).getId();

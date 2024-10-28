@@ -20,7 +20,7 @@ class BrandWriteServiceTest {
     private BrandReadService brandReadService;
 
     @Test
-    void createTest() {
+    void 브랜드_생성_테스트() {
         // given
         final var brandCreateCommand = new BrandCreateCommand("test");
 
@@ -34,7 +34,7 @@ class BrandWriteServiceTest {
     }
 
     @Test
-    void createValidateTest() {
+    void 브랜드_생성_시_중복_이름이_존재할_시_Exception을_발생시킨다() {
 
         // given
         final var brandCreateCommand = new BrandCreateCommand("A");
@@ -46,7 +46,7 @@ class BrandWriteServiceTest {
     }
 
     @Test
-    void updateTest() {
+    void 브랜드_업데이트_테스트() {
         // given
         final var brandCreateCommand = new BrandCreateCommand("test");
         final var brand = brandWriteService.create(brandCreateCommand);
@@ -62,7 +62,7 @@ class BrandWriteServiceTest {
     }
 
     @Test
-    void updateValidateTest() {
+    void 브랜드_업데이트_시_중복_이름을_검사한다() {
         // given
         final var brandCreateCommand = new BrandCreateCommand("test");
         final var brand = brandWriteService.create(brandCreateCommand);
@@ -76,7 +76,7 @@ class BrandWriteServiceTest {
     }
 
     @Test
-    void deleteTest() {
+    void 브랜드_삭제_테스트() {
         // given
         final var brandCreateCommand = new BrandCreateCommand("test");
         final var brand = brandWriteService.create(brandCreateCommand);

@@ -35,14 +35,12 @@ public class MinPriceByCategoryResponse {
                 .orElse(0);
 
         final var contents = categoryMinOrMaxPrices.stream()
-                .map(categoryMinOrMaxPrice -> {
-                    return CategoryInnerResponse.builder()
-                            .categoryId(categoryMinOrMaxPrice.getCategoryId())
-                            .categoryName(categoryMinOrMaxPrice.getCategoryName())
-                            .brandName(String.join(", ", categoryMinOrMaxPrice.getBrandNames()))
-                            .price(categoryMinOrMaxPrice.getPrice())
-                            .build();
-                })
+                .map(categoryMinOrMaxPrice -> CategoryInnerResponse.builder()
+                        .categoryId(categoryMinOrMaxPrice.getCategoryId())
+                        .categoryName(categoryMinOrMaxPrice.getCategoryName())
+                        .brandName(String.join(", ", categoryMinOrMaxPrice.getBrandNames()))
+                        .price(categoryMinOrMaxPrice.getPrice())
+                        .build())
                 .sorted(Comparator.comparing(CategoryInnerResponse::getCategoryId))
                 .toList();
 
