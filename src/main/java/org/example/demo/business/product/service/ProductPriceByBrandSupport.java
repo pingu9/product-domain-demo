@@ -33,7 +33,7 @@ public class ProductPriceByBrandSupport {
                 .collect(Collectors.toSet());
 
         final List<BrandMinPrice> minPriceForEachBrands = allBrands.stream()
-                .map(getBrandBrandMinPriceFunction(allProducts, allCategories))
+                .map(convertBrandToMinPriceInfoOfItSelf(allProducts, allCategories))
                 .toList();
 
         final var minPrice = minPriceForEachBrands.stream()
@@ -46,7 +46,7 @@ public class ProductPriceByBrandSupport {
                 .collect(Collectors.toList());
     }
 
-    private Function<Brand, BrandMinPrice> getBrandBrandMinPriceFunction(final Set<Product> allProducts, final Set<Category> allCategories) {
+    private Function<Brand, BrandMinPrice> convertBrandToMinPriceInfoOfItSelf(final Set<Product> allProducts, final Set<Category> allCategories) {
         return brand -> {
             final var productsOfBrand = allProducts.stream()
                     .filter(product -> product.getBrands().contains(brand))

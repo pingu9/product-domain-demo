@@ -1,24 +1,24 @@
 package org.example.demo.business.product.service;
 
-import org.example.demo.business.product.Product;
+import org.example.demo.business.product.BrandMinPrice;
+import org.example.demo.business.product.command.ProductCreateCommand;
+import org.example.demo.business.product.command.ProductUpdateCommand;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Transactional
 class ProductPriceServiceTest {
 
     @Autowired
     private ProductPriceService productPriceService;
-
-    @Autowired
-    private ProductReadService productReadService;
 
     @Autowired
     private ProductWriteService productWriteService;
@@ -64,6 +64,61 @@ class ProductPriceServiceTest {
         assertEquals("F", result8.getBrandNames().get(0));
 
         assertThrows(IllegalArgumentException.class, () -> productPriceService.findMinPriceByCategoryName("존재하지 않는 카테고리"));
+    }
+
+    @Test
+    void 단일_브랜드_구매_최저가격_브랜드_정보를_가져온다() {
+        // given
+
+        // when
+        final var result = productPriceService.findMinPriceBrandWhenBuyingAllCategories();
+
+        // then
+        assertEquals(1, result.size());
+        assertEquals(36100, result.get(0).getPrice());
+        assertEquals("D", result.get(0).getBrandName());
+    }
+
+    @Test
+    void 최저가_상품_추가_시_카테고리별_최저가_계산에_이를_반영한다() {
+
+        // given
+        productWriteService.insert(new ProductCreateCommand("test", 9900, Set.of(1L), Set.of(1L)));
+
+        // when
+        final var result = productPriceService.findMinPriceByCategoryName("상의");
+
+        // then
+        assertEquals(9900, result.getPrice());
+    }
+
+    @Test
+    void 단일_브랜드_구매_최저가격_경신_시_브랜드별_최저가_계산에_이를_반영한다() {
+        // given
+        productWriteService.insert(new ProductCreateCommand("test", 1000, Set.of(2L), Set.of(3L))); // 아우터, C, 1000원으로 추가 시 C가 총합 최저로 변경
+
+        // when
+        final var result = productPriceService.findMinPriceBrandWhenBuyingAllCategories();
+
+        // then
+        assertEquals(1, result.size());
+        assertEquals("C", result.get(0).getBrandName());
+        assertEquals(31900, result.get(0).getPrice());
+    }
+
+    @Test
+    void 최저가_브랜드가_여러개일_경우_모두_반환한다() {
+
+        // given
+        productWriteService.update(new ProductUpdateCommand(12L, "test", 5200, Set.of(2L), Set.of(3L))); // 아우터, C, 기존 상품 5200원으로 변경 시 C,D가 동률
+
+        // when
+        final var result = productPriceService.findMinPriceBrandWhenBuyingAllCategories();
+
+        // then
+        assertEquals(2, result.size());
+        assertEquals(36100, result.get(0).getPrice());
+        assertTrue(result.stream().map(BrandMinPrice::getBrandName).collect(Collectors.toSet()).containsAll(Set.of("C", "D")));
     }
 
 
