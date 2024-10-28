@@ -13,4 +13,6 @@ public interface BrandReadRepository {
 
     Optional<Brand> findByName(String name);
 
+    Set<Brand> findAll();
+
 }

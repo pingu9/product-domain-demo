@@ -34,4 +34,12 @@ public class BrandReadRepositoryImpl implements BrandReadRepository {
                 .map(Brand::fromEntity);
     }
 
+    @Override
+    public Set<Brand> findAll() {
+        return brandJpaRepository.findAll()
+                .stream()
+                .map(Brand::fromEntity)
+                .collect(Collectors.toSet());
+    }
+
 }

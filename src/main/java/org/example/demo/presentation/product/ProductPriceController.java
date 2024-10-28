@@ -5,6 +5,7 @@ import org.example.demo.business.product.service.ProductPriceService;
 import org.example.demo.presentation.product.response.MinMaxPriceForEachCategoryResponse;
 import org.example.demo.presentation.product.response.MinPriceByCategoryResponse;
 import org.example.demo.presentation.product.response.MinPriceCombinationByBrandResponse;
+import org.example.demo.presentation.product.service.ProductPricePresentationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,8 @@ public class ProductPriceController {
 
     private final ProductPriceService productPriceService;
 
+    private final ProductPricePresentationService productPricePresentationService;
+
     @GetMapping("/min-price-by-all-categories")
     public ResponseEntity<MinPriceByCategoryResponse> getMinPriceByCategories() {
 
@@ -29,7 +32,7 @@ public class ProductPriceController {
     @GetMapping("/min-price-combination-by-all-brands")
     public ResponseEntity<MinPriceCombinationByBrandResponse> getMinPriceCombinationByBrand() {
 
-        return ResponseEntity.ok(MinPriceCombinationByBrandResponse.from(productPriceService.findMinPriceBrandWhenBuyingAllCategories()));
+        return ResponseEntity.ok(productPricePresentationService.getMinPriceCombinationByBrandResponse());
     }
 
     @GetMapping("/min-max-price-by-category-name/{categoryName}")

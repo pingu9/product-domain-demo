@@ -11,4 +11,6 @@ public interface CategoryReadRepository {
 
     Set<Category> findAllByIds(Set<Long> longs);
 
+    Set<Category> findAll();
+
 }

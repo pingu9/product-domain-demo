@@ -28,4 +28,12 @@ public class CategoryReadRepositoryImpl implements CategoryReadRepository {
                 .collect(Collectors.toSet());
     }
 
+    @Override
+    public Set<Category> findAll() {
+        return categoryJpaRepository.findAll()
+                .stream()
+                .map(Category::fromEntity)
+                .collect(Collectors.toSet());
+    }
+
 }

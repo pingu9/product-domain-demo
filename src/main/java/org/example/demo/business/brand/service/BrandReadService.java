@@ -23,4 +23,10 @@ public class BrandReadService {
     public Set<Brand> findAllByIds(final Set<Long> ids) {
         return brandReadRepository.findAllByIds(ids);
     }
+
+    @Transactional(readOnly = true)
+    public Set<Brand> findAll() {
+        return brandReadRepository.findAll();
+    }
+
 }
