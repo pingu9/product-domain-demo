@@ -31,15 +31,15 @@
 
 - 아래 명령어를 순차적으로 실행합니다.
 
-./gradlew clean build
-./gradlew bootRun
+  - ./gradlew clean build
+  - ./gradlew bootRun
 
 서버가 실행한 이후 Swagger를 통하여 API 호출을 테스트할 수 있습니다.
 http://localhost:8080/swagger-ui/index.html
 
 ### 단위, 통합 테스트 실행
 
-./gradlew test
+- ./gradlew test
 
 ## API 명세
 
