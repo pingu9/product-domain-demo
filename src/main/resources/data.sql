@@ -1,21 +1,21 @@
-insert into brand(id, name) values (1, 'A');
-insert into brand(id, name) values (2, 'B');
-insert into brand(id, name) values (3, 'C');
-insert into brand(id, name) values (4, 'D');
-insert into brand(id, name) values (5, 'E');
-insert into brand(id, name) values (6, 'F');
-insert into brand(id, name) values (7, 'G');
-insert into brand(id, name) values (8, 'H');
-insert into brand(id, name) values (9, 'I');
+insert into brand(name) values ('A');
+insert into brand(name) values ('B');
+insert into brand(name) values ('C');
+insert into brand(name) values ('D');
+insert into brand(name) values ('E');
+insert into brand(name) values ('F');
+insert into brand(name) values ('G');
+insert into brand(name) values ('H');
+insert into brand(name) values ('I');
 
-insert into category(id, name) values (1, '상의');
-insert into category(id, name) values (2, '아우터');
-insert into category(id, name) values (3, '바지');
-insert into category(id, name) values (4, '스니커즈');
-insert into category(id, name) values (5, '가방');
-insert into category(id, name) values (6, '모자');
-insert into category(id, name) values (7, '양말');
-insert into category(id, name) values (8, '액세서리');
+insert into category(name) values ('상의');
+insert into category(name) values ('아우터');
+insert into category(name) values ('바지');
+insert into category(name) values ('스니커즈');
+insert into category(name) values ('가방');
+insert into category(name) values ('모자');
+insert into category(name) values ('양말');
+insert into category(name) values ('액세서리');
 
 insert into product(name, price) values ('A상의', 11200);
 insert into product(name, price) values ('B상의', 10500);

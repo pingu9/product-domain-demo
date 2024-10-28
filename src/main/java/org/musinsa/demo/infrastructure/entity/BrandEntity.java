@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.musinsa.demo.business.brand.command.BrandCreateCommand;
 import org.musinsa.demo.business.brand.Brand;
+import org.musinsa.demo.business.brand.command.BrandUpdateCommand;
 
 @Entity
 @Getter
@@ -30,6 +31,13 @@ public class BrandEntity {
     public static BrandEntity fromCommand(final BrandCreateCommand brandCreateCommand) {
         return BrandEntity.builder()
                 .name(brandCreateCommand.name())
+                .build();
+    }
+
+    public static BrandEntity fromCommand(final BrandUpdateCommand brandUpdateCommand) {
+        return BrandEntity.builder()
+                .id(brandUpdateCommand.id())
+                .name(brandUpdateCommand.name())
                 .build();
     }
 

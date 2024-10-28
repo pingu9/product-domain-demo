@@ -29,8 +29,9 @@ public class BrandReadRepositoryImpl implements BrandReadRepository {
     }
 
     @Override
-    public boolean existsByName(final String name) {
-        return brandJpaRepository.existsByName(name);
+    public Optional<Brand> findByName(final String name) {
+        return brandJpaRepository.findByName(name)
+                .map(Brand::fromEntity);
     }
 
 }

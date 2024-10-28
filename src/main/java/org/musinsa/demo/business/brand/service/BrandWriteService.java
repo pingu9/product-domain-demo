@@ -1,6 +1,7 @@
 package org.musinsa.demo.business.brand.service;
 
 import lombok.RequiredArgsConstructor;
+import org.musinsa.demo.business.brand.Brand;
 import org.musinsa.demo.business.brand.command.BrandCreateCommand;
 import org.musinsa.demo.business.brand.command.BrandUpdateCommand;
 import org.musinsa.demo.infrastructure.entity.BrandEntity;
@@ -12,25 +13,24 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class BrandWriteService {
 
-    private final BrandReadService brandReadService;
-
     private final BrandWriteRepository brandWriteRepository;
 
     private final BrandWriteValidator brandWriteValidator;
 
     @Transactional
-    public void create(final BrandCreateCommand brandCreateCommand) {
+    public Brand create(final BrandCreateCommand brandCreateCommand) {
 
         final var brandEntity = BrandEntity.fromCommand(brandCreateCommand);
         brandWriteValidator.validateInsert(brandEntity);
-        brandWriteRepository.save(brandEntity);
+        return brandWriteRepository.save(brandEntity);
     }
 
     @Transactional
-    public void update(final BrandUpdateCommand brandUpdateCommand) {
+    public Brand update(final BrandUpdateCommand brandUpdateCommand) {
 
-        final var brandEntity = BrandEntity.fromDomain(brandReadService.findById(brandUpdateCommand.id()));
-        brandWriteRepository.save(brandEntity);
+        brandWriteValidator.validateUpdate(brandUpdateCommand);
+        final var brandEntity = BrandEntity.fromCommand(brandUpdateCommand);
+        return brandWriteRepository.save(brandEntity);
     }
 
     @Transactional
